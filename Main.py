@@ -1,6 +1,7 @@
 from Gui import Ui_MainWindow
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pyqtgraph import PlotWidget, plot
+import  pandas  as  pd
 import random
 import pyqtgraph as pg
 import sys, os
@@ -18,13 +19,13 @@ class AppWindow(QtWidgets.QMainWindow,Ui_MainWindow): #Test
 
 
     def draw(self):
-        dev_x = [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
-        dev_y = [38496, 42000, 46752, 49320, 53200,
-                 56000, 62316, 64928, 67317, 68748, 73752]
-        for i in range(1,200):
-            dev_x.append(random.randint(-8,10))
-            dev_y.append(random.randint(-20,20))
-            self.graphicsView.plot(dev_x,dev_y)
+        chunks = []
+        for chunk in pd.read_csv("emg - Copy.csv",chunksize = 50):
+            i = chunk
+            chunks.append(i)
+        for j in range(len(chunks)):
+            self.graphicsView.plot(chunks[j])
+            plt.pause(0.3)
 
     def clear(self):
         self.graphicsView.clear()

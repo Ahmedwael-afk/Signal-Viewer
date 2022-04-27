@@ -7,7 +7,7 @@ df = pd.read_csv("emg - Copy.csv", nrows=20)
 chunks = []
 print(len(df))
 # print(chunks,type(chunks))
-for chunk in pd.read_csv("top_secret.csv",chunksize = 50):
+for chunk in pd.read_csv("emg - Copy.csv",chunksize = 50):
 	i = chunk
 	chunks.append(i)
 
